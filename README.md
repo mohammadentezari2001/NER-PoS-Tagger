@@ -15,6 +15,38 @@ The project explores both a simple statistical baseline (Most Frequent Tagger) a
     *   Detailed evaluation metrics at both the **Entity Level** and **Token Level**.
 *   **Technologies:** PyTorch, spaCy, scikit-learn.
 
+
+### Datasets
+
+This project utilizes publicly available datasets tailored for the specific sequence tagging tasks:
+
+#### 1. Named Entity Recognition (NER) Dataset
+
+*   **Name:** Resume Entities for NER
+*   **Source:** [Kaggle Dataset by DataTurks](https://www.kaggle.com/datasets/dataturks/resume-entities-for-ner)
+*   **Content:** This dataset consists of **220 labeled resumes** intended for training NER models for resume parsing. The data is in JSONL format, where each entry contains the resume text (`content`) and a list of entities (`annotation`) marked by character offsets.
+*   **Entity Categories (10 Labels):**
+    *   `Name`
+    *   `College Name`
+    *   `Degree`
+    *   `Graduation Year`
+    *   `Years of Experience`
+    *   `Companies worked at`
+    *   `Designation`
+    *   `Skills`
+    *   `Location`
+    *   `Email Address`
+*   **Note on Usage:** The source data is known to contain issues such as overlapping or non-token-aligned entity spans, which are typical challenges when working with crowdsourced or automatically annotated data. The NER script includes robust preprocessing logic to filter and align these entities using spaCy's utility functions (`offsets_to_biluo_tags`) to ensure successful model training.
+
+#### 2. Part-of-Speech (PoS) Tagging Dataset
+
+*   **Name:** UD\_English-GUM (Universal Dependencies - Georgetown University Multilayer corpus)
+*   **Source:** [Universal Dependencies GitHub repository (UD\_English-GUM)](https://github.com/UniversalDependencies/UD_English-GUM/tree/5ae58e9b57c907e6047cad319beff9dce940f391)
+*   **Content:** This is an open-source, richly annotated corpus of English texts from multiple genres (e.g., academic, non-fiction, travel guides). It is a part of the Universal Dependencies project.
+*   **Annotation:** The data is manually corrected to include **Universal Part-of-Speech (UPOS)** tags, along with morphological features and dependency relations. The corpus contains a large number of annotated tokens (over 229,000 tokens in the referenced version), making it a comprehensive resource for training and evaluating PoS taggers.
+*   **File Format:** The notebook uses a pre-processed version of this dataset, likely in a JSONL format (`train.json`, `test.json`), where each entry contains `words` and corresponding `labels` (PoS tags).
+
+
 ### Project Structure
 
 The core logic is contained within two Jupyter Notebooks:
